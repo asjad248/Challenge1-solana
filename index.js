@@ -45,8 +45,15 @@ const airDropSol = async () => {
 
         // Request airdrop of 2 SOL to the wallet
         console.log("Airdropping some SOL to my wallet!");
+        var argv = require('minimist')(process.argv.slice(1));
+
+        // Reading command line value for user public key
+        var userpublickey = process.argv[2];
+
+        console.log(userpublickey);
+        
         const fromAirDropSignature = await connection.requestAirdrop(
-            new PublicKey(myWallet.publicKey),
+            new PublicKey(userpublickey),
             2 * LAMPORTS_PER_SOL
         );
         await connection.confirmTransaction(fromAirDropSignature);
